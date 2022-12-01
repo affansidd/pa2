@@ -122,7 +122,7 @@ def start_iperf(net):
     # long lived TCP flow. You may need to redirect iperf's stdout to avoid blocking.
 
     h1 = net.get('h1')
-    client = h1.popen("iperf -c " + str(h2.IP()) + " -t " + str(args.time))
+    h1.popen("iperf -c " + str(h2.IP()) + " -t " + str(args.time))
 
 def start_webserver(net):
     h1 = net.get('h1')
@@ -173,7 +173,8 @@ def bufferbloat():
 
     # Start all the monitoring processes
     start_tcpprobe("cwnd.txt")
-    # start_ping(net)
+    print("starting ping")
+    start_ping(net)
 
     # TODO: Start monitoring the queue sizes.  Since the switch I
     # created is "s0", I monitor one of the interfaces.  Which
@@ -185,14 +186,16 @@ def bufferbloat():
     #qmon = None
 
     # TODO: Start iperf, webservers, etc.
-    # start_iperf(net)
+    print("starting iperf")
+    start_iperf(net)
     # start_ping(net)
-    # start_webserver(net)
-    iperf_proc = Process(target=start_iperf, args=(net,))
-    ping_proc = Process(target=start_ping, args=(net,))
-    iperf_proc.start()
-    ping_proc.start()
+    print("starting web")
     start_webserver(net)
+    # iperf_proc = Process(target=start_iperf, args=(net,))
+    # ping_proc = Process(target=start_ping, args=(net,))
+    # iperf_proc.start()
+    # ping_proc.start()
+    # start_webserver(net)
 
     # Hint: The command below invokes a CLI which you can use to
     # debug.  It allows you to run arbitrary commands inside your
@@ -236,3 +239,4 @@ def bufferbloat():
 
 if __name__ == "__main__":
     bufferbloat()
+    print("bufferbloat done")
