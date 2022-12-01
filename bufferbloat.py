@@ -144,7 +144,7 @@ def start_ping(net):
     h1 = net.get('h1')
     h2 = net.get('h2')
     popen = h1.popen("ping -i 0.1 %s > %s/ping.txt"%(h2.IP(), args.dir), shell=True)
-    popen.communicate()
+    # popen.communicate()
 
 def run_experiment(h1, h2):
     results = []
