@@ -185,8 +185,13 @@ def bufferbloat():
     #qmon = None
 
     # TODO: Start iperf, webservers, etc.
-    start_iperf(net)
-    start_ping(net)
+    # start_iperf(net)
+    # start_ping(net)
+    # start_webserver(net)
+    iperf_proc = Process(target=start_iperf, args=(net,))
+    ping_proc = Process(target=start_ping, args=(net,))
+    iperf_proc.start()
+    ping_proc.start()
     start_webserver(net)
 
     # Hint: The command below invokes a CLI which you can use to
