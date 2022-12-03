@@ -6,7 +6,7 @@ To run the code, inside the mininet VM, after uncompressing the submission files
 
 Upon completion, the plots will be located in the bb-q20 and bb-q100 directories. 
 
-Questions: 
+## Questions: ##
 
 1. Why do you see a difference in webpage fetch times with small and large router buffers?
 
@@ -39,4 +39,6 @@ RTT = k * queue_size, where k is a constant of proportionality. From visual obse
 
 4. Identify and describe two ways to mitigate the bufferbloat problem.
 
+One way to mitigate the bufferbloat problem is to limit the maximum buffer size to regulate the size of the congestion window and prevent it from getting too large. 
 
+Another way to mitigate the problem is by using the Random Early Detection (RED) algorithm. When a router detects that the buffer is getting full, it can randomly start dropping packets to signal congestions to the senders. The probability of dropping a packet is determined as a function of the average queue length. The RED algorithm drops packets before the buffer fills up completely and drops packets in proportion to each flow's rate thus reducing higher rate flows more often. This algorithm also desynchronizes TCP senders and by basing dropping decisions on average queue size, the algorithm is tolerant of bursty traffic. 
