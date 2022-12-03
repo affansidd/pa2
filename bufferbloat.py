@@ -122,7 +122,7 @@ def start_iperf(net):
     # long lived TCP flow. You may need to redirect iperf's stdout to avoid blocking.
 
     h1 = net.get('h1')
-    h1.popen("iperf -c " + str(h2.IP()) + " -t " + str(args.time), shell=True)
+    h1.popen("iperf -c " + str(h2.IP()) + " -t " + str(args.time))
 
 def start_webserver(net):
     h1 = net.get('h1')
@@ -173,7 +173,6 @@ def bufferbloat():
 
     # Start all the monitoring processes
     start_tcpprobe("cwnd.txt")
-    print("starting ping")
     start_ping(net)
 
     # TODO: Start monitoring the queue sizes.  Since the switch I
@@ -186,17 +185,9 @@ def bufferbloat():
     #qmon = None
 
     # TODO: Start iperf, webservers, etc.
-    print("starting iperf")
     start_iperf(net)
-    # start_ping(net)
-    print("starting web")
     start_webserver(net)
-    # iperf_proc = Process(target=start_iperf, args=(net,))
-    # ping_proc = Process(target=start_ping, args=(net,))
-    # iperf_proc.start()
-    # ping_proc.start()
-    # start_webserver(net)
-
+    
     # Hint: The command below invokes a CLI which you can use to
     # debug.  It allows you to run arbitrary commands inside your
     # emulated hosts h1 and h2.
